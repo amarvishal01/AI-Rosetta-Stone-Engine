@@ -1,0 +1,62 @@
+{
+  "model_id": "credit_scoring_model_v1",
+  "summary": {
+    "total_rules": 5,
+    "compliant_rules": 3,
+    "non_compliant_rules": 2,
+    "risk_level": "HIGH"
+  },
+  "article_compliance": {
+    "Article_10_Non_Discrimination": false,
+    "Article_13_Transparency": true,
+    "Article_14_Human_Oversight": true,
+    "Article_15_Accuracy_Robustness": true
+  },
+  "recommendations": [
+    "Remove or modify rules using protected attributes",
+    "Implement additional bias testing procedures",
+    "Consider model retraining with fairness constraints",
+    "Establish human oversight for high-risk decisions"
+  ],
+  "detailed_findings": [
+    {
+      "rule_id": "GBAPA_001",
+      "rule_text": "Rule_GBAPA_001: IF (credit_score > 712.5016) AND (debt_to_income <= 0.2949) THEN decision -> 'approved (confidence: 0.8792)'",
+      "issues": []
+    },
+    {
+      "rule_id": "GBAPA_002",
+      "rule_text": "Rule_GBAPA_002: IF (annual_income > 54.5592) AND (employment_years > 2.1405) THEN decision -> 'approved (confidence: 0.7789)'",
+      "issues": []
+    },
+    {
+      "rule_id": "GBAPA_003",
+      "rule_text": "Rule_GBAPA_003: IF (credit_score <= 554.8740) AND (debt_to_income > 0.4918) THEN decision -> 'rejected (confidence: 0.8183)'",
+      "issues": []
+    },
+    {
+      "rule_id": "GBAPA_004",
+      "rule_text": "Rule_GBAPA_004: IF (age > 26.2360) AND (property_value > 211.4883) THEN decision -> 'approved (confidence: 0.7236)'",
+      "issues": [
+        {
+          "type": "PROTECTED_ATTRIBUTE_USAGE",
+          "article": "Article 10 - Non-discrimination",
+          "description": "Rule uses protected attribute: age",
+          "severity": "HIGH"
+        }
+      ]
+    },
+    {
+      "rule_id": "GBAPA_005",
+      "rule_text": "Rule_GBAPA_005: IF (marital_status == 1.0000) AND (num_dependents <= 1.9274) THEN decision -> 'approved (confidence: 0.7152)'",
+      "issues": [
+        {
+          "type": "PROTECTED_ATTRIBUTE_USAGE",
+          "article": "Article 10 - Non-discrimination",
+          "description": "Rule uses protected attribute: marital_status",
+          "severity": "HIGH"
+        }
+      ]
+    }
+  ]
+}
