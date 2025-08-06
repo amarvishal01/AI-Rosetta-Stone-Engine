@@ -1,33 +1,14 @@
-import sys
-import os
-
-# Add the project root directory to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
-
-# --- Now the rest of your script ---
-import streamlit as st
-import pandas as pd
-from rosetta_stone.knowledge_base.knowledge_base_builder import KnowledgeBaseBuilder
-from rosetta_stone.bridge.extractor import NeuroSymbolicBridge
-from rosetta_stone.auditor.auditor import ComplianceAuditor
-
-# (The rest of your code continues as normal...)
-
+# --- 1. Import all necessary libraries once at the top ---
 import streamlit as st
 import pandas as pd
 import json
 
-# --- 1. Import your backend "brains" ---
-# Make sure your project structure allows these imports.
-# This assumes your dashboard_app.py is in the root and you have an 'ai-rosetta-stone' directory.
+# Import your backend "brains"
 from rosetta_stone.knowledge_base.knowledge_base_builder import KnowledgeBaseBuilder
 from rosetta_stone.bridge.extractor import NeuroSymbolicBridge
 from rosetta_stone.auditor.auditor import ComplianceAuditor
 
-# --- 2. Create a function to run the full audit pipeline ---
-# The @st.cache_data decorator is a Streamlit superpower. It ensures this
-# complex function only runs once, and it will store the result in memory.
-# On subsequent reloads, it will return the cached result instantly.
+# --- 2. Create the function to run the full audit pipeline ---
 @st.cache_data
 def run_full_audit():
     """
@@ -53,9 +34,8 @@ def run_full_audit():
     compliance_report = auditor.run_audit(model_rules, legal_predicates)
 
     # We will simulate a more complete report for the UI
-    # In a real app, your auditor would generate this structure directly.
     full_report = {
-        "overall_compliance": 85.0, # You could calculate this based on pass/fail rates
+        "overall_compliance": 85.0,
         "compliance_snippet": "Audit of Article 14 found all rules triggering 'high_scrutiny' flags were compliant.",
         "articles": [
             {"name": "EU AI Act - Article 10", "status": "Verified"},
@@ -64,53 +44,38 @@ def run_full_audit():
             {"name": "EU AI Act - Article 19", "status": "Violation"}
         ]
     }
-    # We can inject the real result from our one-article audit here.
-    # This is just for making the demo look good.
     if compliance_report.get("Article 14 (Human Oversight)", {}).get("status") == "Compliance Verified":
          full_report["articles"][1] = {"name": "EU AI Act - Article 14", "status": "Verified"}
     
     return full_report
 
-
 # --- 3. Build the Dashboard UI ---
-
 st.set_page_config(layout="wide", page_title="AI Rosetta Stone")
-
 st.title("AI Rosetta Stone Dashboard")
 st.markdown("---")
 
-# --- Run the audit and get the REAL data ---
 st.write("Running live compliance audit...")
 report_data = run_full_audit()
 st.write("...Audit complete!")
 
-
-# Main content area with columns
 col1, col2 = st.columns([1, 1])
-
 with col1:
     st.header("Overview")
     st.metric(label="Compliance Score", value=f"{report_data['overall_compliance']}%")
-    
     st.subheader("Compliance Verified")
     st.info(report_data['compliance_snippet'])
-
 with col2:
     st.header("Articles")
     for article in report_data['articles']:
         status = article['status']
         name = article['name']
-        
         if status == "Verified":
             st.success(f"✅ {name}: **{status}**")
         elif status == "Warning":
             st.warning(f"⚠️ {name}: **{status}**")
         elif status == "Violation":
             st.error(f"❌ {name}: **{status}**")
-
 st.markdown("---")
 
-# Optional: Display the raw report for debugging
 with st.expander("Show Raw Audit Report"):
     st.json(report_data)
-
