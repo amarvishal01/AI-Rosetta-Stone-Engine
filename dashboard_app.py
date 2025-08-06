@@ -1,3 +1,18 @@
+import sys
+import os
+
+# Add the project root directory to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
+
+# --- Now the rest of your script ---
+import streamlit as st
+import pandas as pd
+from rosetta_stone.knowledge_base.knowledge_base_builder import KnowledgeBaseBuilder
+from rosetta_stone.bridge.extractor import NeuroSymbolicBridge
+from rosetta_stone.auditor.auditor import ComplianceAuditor
+
+# (The rest of your code continues as normal...)
+
 import streamlit as st
 import pandas as pd
 import json
@@ -98,3 +113,4 @@ st.markdown("---")
 # Optional: Display the raw report for debugging
 with st.expander("Show Raw Audit Report"):
     st.json(report_data)
+
