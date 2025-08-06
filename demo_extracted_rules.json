@@ -1,0 +1,122 @@
+[
+  {
+    "rule_id": "GBAPA_001",
+    "conditions": [
+      {
+        "feature": "credit_score",
+        "operator": ">",
+        "threshold": 712.5016006569385,
+        "importance": 0.7409613636896932
+      },
+      {
+        "feature": "debt_to_income",
+        "operator": "<=",
+        "threshold": 0.29494667533533653,
+        "importance": 0.5573315387170805
+      }
+    ],
+    "conclusion": {
+      "outcome": "approved",
+      "value": 0.8791964035634082
+    },
+    "confidence": 0.8791964035634082,
+    "coverage": 0.13295604869070177,
+    "readable_format": "Rule_GBAPA_001: IF (credit_score > 712.5016) AND (debt_to_income <= 0.2949) THEN decision -> 'approved (confidence: 0.8792)'"
+  },
+  {
+    "rule_id": "GBAPA_002",
+    "conditions": [
+      {
+        "feature": "annual_income",
+        "operator": ">",
+        "threshold": 54.5591880439395,
+        "importance": 0.7470386663450976
+      },
+      {
+        "feature": "employment_years",
+        "operator": ">",
+        "threshold": 2.140455439846837,
+        "importance": 0.8369558298579975
+      }
+    ],
+    "conclusion": {
+      "outcome": "approved",
+      "value": 0.7789361063194892
+    },
+    "confidence": 0.7789361063194892,
+    "coverage": 0.22427890823053687,
+    "readable_format": "Rule_GBAPA_002: IF (annual_income > 54.5592) AND (employment_years > 2.1405) THEN decision -> 'approved (confidence: 0.7789)'"
+  },
+  {
+    "rule_id": "GBAPA_003",
+    "conditions": [
+      {
+        "feature": "credit_score",
+        "operator": "<=",
+        "threshold": 554.874022324471,
+        "importance": 0.6211256326967036
+      },
+      {
+        "feature": "debt_to_income",
+        "operator": ">",
+        "threshold": 0.4917637127692485,
+        "importance": 0.5668106279468847
+      }
+    ],
+    "conclusion": {
+      "outcome": "rejected",
+      "value": 0.8182702602536953
+    },
+    "confidence": 0.8182702602536953,
+    "coverage": 0.15709191824666147,
+    "readable_format": "Rule_GBAPA_003: IF (credit_score <= 554.8740) AND (debt_to_income > 0.4918) THEN decision -> 'rejected (confidence: 0.8183)'"
+  },
+  {
+    "rule_id": "GBAPA_004",
+    "conditions": [
+      {
+        "feature": "age",
+        "operator": ">",
+        "threshold": 26.236015195496353,
+        "importance": 0.7033382748744489
+      },
+      {
+        "feature": "property_value",
+        "operator": ">",
+        "threshold": 211.4882719143249,
+        "importance": 0.5319733673428817
+      }
+    ],
+    "conclusion": {
+      "outcome": "approved",
+      "value": 0.7236164349026288
+    },
+    "confidence": 0.7236164349026288,
+    "coverage": 0.20993311121685665,
+    "readable_format": "Rule_GBAPA_004: IF (age > 26.2360) AND (property_value > 211.4883) THEN decision -> 'approved (confidence: 0.7236)'"
+  },
+  {
+    "rule_id": "GBAPA_005",
+    "conditions": [
+      {
+        "feature": "marital_status",
+        "operator": "==",
+        "threshold": 1,
+        "importance": 0.8533262400637845
+      },
+      {
+        "feature": "num_dependents",
+        "operator": "<=",
+        "threshold": 1.9273896462483904,
+        "importance": 0.668994896010396
+      }
+    ],
+    "conclusion": {
+      "outcome": "approved",
+      "value": 0.7151582903822336
+    },
+    "confidence": 0.7151582903822336,
+    "coverage": 0.1903661444244404,
+    "readable_format": "Rule_GBAPA_005: IF (marital_status == 1.0000) AND (num_dependents <= 1.9274) THEN decision -> 'approved (confidence: 0.7152)'"
+  }
+]
